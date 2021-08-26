@@ -58,6 +58,11 @@ jobs:
         working-directory: ${{runner.workspace}}/build
         shell: bash
         run: ./$EXE_NAME
+      
+      - name: list files
+        working-directory: ${{runner.workspace}}/build
+        shell: bash
+        run: ls
 
       - name: Copy output files to artifact directory
         working-directory: ${{runner.workspace}}/build
