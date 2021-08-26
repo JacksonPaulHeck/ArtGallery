@@ -3,8 +3,9 @@ project(S21-P01-ArtGallery)
 set(EXE_NAME ArtGallery)
 
 set(input01 "test/input.txt")
+set(output01 "output/output.txt")
 
-foreach (file IN LISTS input01)
+foreach (file IN LISTS input01 output01)
     configure_file(${file} ${file} COPYONLY)
 endforeach ()
 
