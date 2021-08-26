@@ -4,9 +4,9 @@ on: [push]
 
 env:
   EXE_NAME: ArtGallery
+  BUILD_TYPE: Release
   INPUT_FILES: test/input.txt
   OUTPUT_FILES: output.txt
-  BUILD_TYPE: Release
 
 jobs:
   build:
