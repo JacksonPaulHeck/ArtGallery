@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
-project(21f-pa01)
-set(EXE_NAME 21f-pa01)
+project(S21-P01-ArtGallery)
+set(EXE_NAME ArtGallery)
 
 set(input01 "test/input.txt")
 

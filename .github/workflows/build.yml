@@ -1,11 +1,11 @@
-name: 21f-pa01
+name: S21-P01-ArtGallery
 
 on: [push]
 
 env:
-  EXE_NAME: 21f-pa01
+  EXE_NAME: ArtGallery
   INPUT_FILES: test/input.txt
-  OUTPUT_FILES: output.txt
+  OUTPUT_FILES: output/output.txt
 
 jobs:
   build:
