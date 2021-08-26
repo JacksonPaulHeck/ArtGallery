@@ -62,7 +62,7 @@ jobs:
       - name: list files
         working-directory: ${{runner.workspace}}/build
         shell: bash
-        run: ls
+        run: ls test
 
       - name: Copy output files to artifact directory
         working-directory: ${{runner.workspace}}/build
