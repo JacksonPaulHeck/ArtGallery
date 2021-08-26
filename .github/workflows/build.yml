@@ -6,7 +6,7 @@ env:
   EXE_NAME: ArtGallery
   BUILD_TYPE: Release
   INPUT_FILES: test/input.txt
-  OUTPUT_FILES: output/output.txt
+  OUTPUT_FILES: output.txt
 
 jobs:
   build:
