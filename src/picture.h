@@ -22,5 +22,5 @@ class Picture {
         void setPrice(int);
         void setWidth(int);
         void setHeight(int);
-        void setCoordinates(int, int);
+        void setCoordinates(Coordinate);
 };
