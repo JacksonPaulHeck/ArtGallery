@@ -28,8 +28,6 @@ void Gallery :: addArt(Picture & picture){
         this->art.push_back(picture);
     }else if(findSpot(picture)){
         this->art.push_back(picture);
-    }else{
-        cout << "No Spot found for: " << picture.getID() << endl;
     }
 };
 void Gallery :: removeArt(int id){
