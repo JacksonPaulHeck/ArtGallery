@@ -1,5 +1,6 @@
 #include "picture.h"
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -15,6 +16,9 @@ class Gallery {
         vector<Picture> getArt();
         void setHeight(int);
         void setWidth(int);
-        void addArt(Picture);
+        void addArt(Picture &);
         void removeArt(int);
+        void showArt();
+        bool findSpot(Picture &);
+        bool isOverlap(Coordinate, Coordinate, Coordinate, Coordinate);
 };

@@ -13,6 +13,7 @@ Picture :: Picture(int id, int price, int width, int height){
     this->price = price;
     this->height = height;
     this->width = width;
+    this->coordinates = {0, 0};
 }
 
 int Picture :: getID(){
@@ -51,7 +52,7 @@ void Picture :: setWidth(int width){
     this->width = width;
 }
 
-void Picture :: setCoordinates(int x, int y){
-    this->coordinates.x = x;
-    this->coordinates.y = y;
+void Picture :: setCoordinates(Coordinate spot){
+    this->coordinates.x = spot.x;
+    this->coordinates.y = spot.y;
 }
