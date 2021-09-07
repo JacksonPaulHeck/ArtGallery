@@ -21,7 +21,6 @@ int main(int argc, char ** argv) {
         highvalue(gallery, pictures, argv[3]);
         custom(gallery, pictures, argv[4]);
         for(int i = 0; i < pictures.size(); i++){
-            cout << pictures[i].getID() << " : " << pictures[i].getPrice() << endl;
             gallery.addArt(pictures[i]);
         }
 
