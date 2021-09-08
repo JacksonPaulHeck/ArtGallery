@@ -11,6 +11,7 @@ void bruteforce(Gallery, vector<Picture>, char *);
 void highvalue(Gallery, vector<Picture>, char *);
 void custom(Gallery, vector<Picture>, char *);
 int getCost(Gallery &);
+void genPermutations(vector<vector<Picture>>&, vector<Picture>&, int, int);
 
 int main(int argc, char ** argv) {
     Gallery gallery;
@@ -68,7 +69,26 @@ void bruteforce (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     outFile << gallery.getHeight() << endl;
     outFile << gallery.getWidth() << endl;
 
-    
+    vector<Gallery> possGalleries;
+    vector<vector<Picture>> possPerms;
+    genPermutations(possPerms, pictures, pictures.size(), pictures.size());
+
+    int maxPrice = 0;
+
+    for (int i = 0; i < possPerms.size(); i++) {
+        Gallery currentGall;
+        for (int j = 0; j < possPerms[i].size(); j++) {
+            currentGall.addArt(possPerms[i][j]);
+        }
+
+        int currentGallPrice = getCost(currentGall);
+        currentGall.showArt();
+
+        if (currentGallPrice > maxPrice) {
+            maxPrice = currentGallPrice;
+            gallery = currentGall;
+        }
+    }
 
 
     for(int i = 0; i < gallery.getArt().size(); i++) {
@@ -138,4 +158,30 @@ int getCost(Gallery & gallery){
         total = total + gallery.getArt()[i].getPrice();
     }
     return total;
+}
+
+void genPermutations(vector<vector<Picture>>& allPerms, vector<Picture>& perm, int size, int n) {
+
+    if (size == 1) {
+        allPerms.push_back(perm);
+        return;
+    }
+
+    for (int i = 0; i < size; i++) {
+        genPermutations(allPerms, perm, size - 1, n);
+
+        //if size is odd, swap first and last element
+        if (size % 2 == 1) {
+            Picture temp = perm[0];
+            perm[0] = perm[size - 1];
+            perm[size - 1] = temp;
+        }
+        //if size is even, swap ith and last element
+        else {
+            Picture temp = perm[i];
+            perm[i] = perm[size - 1];
+            perm[size - 1] = temp;
+        }
+    }
+    
 }

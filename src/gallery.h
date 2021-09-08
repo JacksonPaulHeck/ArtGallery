@@ -11,6 +11,7 @@ class Gallery {
         vector<Picture> art;
     public:
         Gallery();
+        Gallery& operator=(const Gallery&);
         int getHeight();
         int getWidth();
         vector<Picture> getArt();

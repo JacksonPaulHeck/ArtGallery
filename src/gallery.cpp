@@ -7,6 +7,16 @@ Gallery :: Gallery(){
     this->width = 0;
     this->art = art;
 };
+Gallery& Gallery:: operator=(const Gallery& orig) {
+    this->height = orig.height;
+    this->width = orig.width;
+
+    for (int i = 0; i < orig.art.size(); i++) {
+        this->art.push_back(orig.art[i]);
+    }
+
+    return *this;
+};
 int Gallery :: getHeight(){
     return this->height;
 };

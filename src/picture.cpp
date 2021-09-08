@@ -16,6 +16,23 @@ Picture :: Picture(int id, int price, int width, int height){
     this->coordinates = {0, 0};
 }
 
+Picture :: Picture(const Picture& orig) {
+    this->id = orig.id;
+    this->price = orig.price;
+    this->height = orig.height;
+    this->width = orig.width;
+    this->coordinates = orig.coordinates;
+}
+
+Picture& Picture :: operator=(const Picture& orig) {
+    this->id = orig.id;
+    this->price = orig.price;
+    this->height = orig.height;
+    this->width = orig.width;
+    this->coordinates = orig.coordinates;
+    return *this;
+}
+
 int Picture :: getID(){
     return this->id;
 }
