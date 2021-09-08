@@ -132,22 +132,76 @@ void highvalue (Gallery gallery, vector<Picture> pictures, char* outputFile) {
         gallery.addArt(pictures[j]);
     }
 
+    outFile << getCost(gallery) << endl;
+
     for(int i = 0; i < gallery.getArt().size(); i++) {
-        outFile << gallery.getArt()[i].getID() << " " << gallery.getArt()[i].getPrice() << " " << gallery.getArt()[i].getHeight() << " " << gallery.getArt()[i].getWidth() << endl;
+        outFile << gallery.getArt()[i].getID() 
+                << " " 
+                << gallery.getArt()[i].getPrice() 
+                << " " 
+                << gallery.getArt()[i].getWidth() 
+                << " " 
+                << gallery.getArt()[i].getHeight()  
+                << " " 
+                << gallery.getArt()[i].getCoordinates().x 
+                << " " 
+                << gallery.getArt()[i].getCoordinates().y
+                <<  endl;
     }
     outFile.close();
 }
 
 void custom (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     ofstream outFile(outputFile);
-    outFile << gallery.getHeight() << endl;
-    outFile << gallery.getWidth() << endl;
 
-    
+   //get highest cost from vector
+   //add to gallery
+   //loop
+    for(int r = 0; r < pictures.size()-1; r++){
+        int max = r;
+        for(int k = r; k < pictures.size(); k++){
+            double ratioMax = pictures[max].getPrice() * 1.0 / (pictures[max].getWidth() * pictures[max].getHeight());
+            double ratioK = pictures[k].getPrice() * 1.0 / (pictures[k].getWidth() * pictures[k].getHeight());
+            if( ratioMax < ratioK){
+                max = k;
+            }
+        }
+        Picture temp(pictures[r].getID(), pictures[r].getPrice(), pictures[r].getWidth(), pictures[r].getHeight());
+ 
+        pictures[r].setWidth(pictures[max].getWidth());
+        pictures[r].setHeight(pictures[max].getHeight());
+        pictures[r].setCoordinates(pictures[max].getCoordinates());
+        pictures[r].setPrice(pictures[max].getPrice());
+        pictures[r].setID(pictures[max].getID());
 
+        pictures[max].setWidth(temp.getWidth());
+        pictures[max].setHeight(temp.getHeight());
+        pictures[max].setCoordinates(temp.getCoordinates());
+        pictures[max].setPrice(temp.getPrice());
+        pictures[max].setID(temp.getID());
+        
+
+    }
+
+    for(int j = 0; j < pictures.size(); j++){
+        gallery.addArt(pictures[j]);
+    }
+
+    outFile << getCost(gallery) << endl;
 
     for(int i = 0; i < gallery.getArt().size(); i++) {
-        outFile << gallery.getArt()[i].getID() << " " << gallery.getArt()[i].getPrice() << " " << gallery.getArt()[i].getHeight() << " " << gallery.getArt()[i].getWidth() << endl;
+        outFile << gallery.getArt()[i].getID() 
+                << " " 
+                << gallery.getArt()[i].getPrice() 
+                << " " 
+                << gallery.getArt()[i].getWidth() 
+                << " " 
+                << gallery.getArt()[i].getHeight()  
+                << " " 
+                << gallery.getArt()[i].getCoordinates().x 
+                << " " 
+                << gallery.getArt()[i].getCoordinates().y
+                <<  endl;
     }
     outFile.close();
 }
