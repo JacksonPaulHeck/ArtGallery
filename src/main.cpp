@@ -77,12 +77,14 @@ void bruteforce (Gallery gallery, vector<Picture> pictures, char* outputFile) {
 
     for (int i = 0; i < possPerms.size(); i++) {
         Gallery currentGall;
+        currentGall.setWidth(gallery.getWidth());
+        currentGall.setHeight(gallery.getHeight());        
         for (int j = 0; j < possPerms[i].size(); j++) {
             currentGall.addArt(possPerms[i][j]);
         }
 
         int currentGallPrice = getCost(currentGall);
-        currentGall.showArt();
+        //currentGall.showArt();
 
         if (currentGallPrice > maxPrice) {
             maxPrice = currentGallPrice;
