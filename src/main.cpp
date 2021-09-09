@@ -1,4 +1,3 @@
-#include <cstdio>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -12,6 +11,7 @@ void bruteforce(Gallery, vector<Picture>, char *);
 void highvalue(Gallery, vector<Picture>, char *);
 void custom(Gallery, vector<Picture>, char *);
 int getCost(Gallery &);
+void genPermutations(vector<vector<Picture>>&, vector<Picture>&, int, int);
 
 int main(int argc, char ** argv) {
     Gallery gallery;
@@ -25,7 +25,6 @@ int main(int argc, char ** argv) {
     else {
         cout << "No Input or Output files given" << endl;
     }
-
     return 0;
 }
 
@@ -35,9 +34,10 @@ void parseFile (char * filename, Gallery & gallery, vector<Picture> & pictures){
     ifstream myfile (filename);
     if(myfile.is_open()) {
         getline(myfile, line, ' ');
-        gallery.setWidth(stoi(line));
+        int w = stoi(line);
         getline(myfile, line);
-        gallery.setHeight(stoi(line));
+        int h = stoi(line);
+        gallery.Init(w, h);
         getline(myfile, line);
         numOfPictures = stoi(line);
         for (int i = 0; i < numOfPictures; i++){
@@ -60,26 +60,56 @@ void parseFile (char * filename, Gallery & gallery, vector<Picture> & pictures){
 
 void bruteforce (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     ofstream outFile(outputFile);
-    outFile << gallery.getHeight() << endl;
-    outFile << gallery.getWidth() << endl;
+    if(pictures.size() <= 10){
+        outFile << gallery.getHeight() << endl;
+        outFile << gallery.getWidth() << endl;
+        vector<Gallery> possGalleries;
+        vector<vector<Picture>> possPerms;
+        genPermutations(possPerms, pictures, pictures.size(), pictures.size());
+        int maxPrice = 0;
 
-    
+        for (int i = 0; i < possPerms.size(); i++) {
+            Gallery currentGall;
+            currentGall.Init(gallery.getWidth(), gallery.getHeight());
+            for (int j = 0; j < possPerms[i].size(); j++) {
+                currentGall.Insert(possPerms[i][j]);
+            }
 
+            int currentGallPrice = getCost(currentGall);
 
-    for(int i = 0; i < gallery.getArt().size(); i++) {
-        outFile << gallery.getArt()[i].getID() << " " << gallery.getArt()[i].getPrice() << " " << gallery.getArt()[i].getHeight() << " " << gallery.getArt()[i].getWidth() << endl;
+            if (currentGallPrice > maxPrice) {
+                maxPrice = currentGallPrice;
+                gallery = currentGall;
+            }
+        }
+
+        outFile << getCost(gallery) << endl;
+
+        for(int i = 0; i < gallery.getArt().size(); i++) {
+            outFile << gallery.getArt()[i].getID() 
+                << " " 
+                << gallery.getArt()[i].getPrice() 
+                << " " 
+                << gallery.getArt()[i].getWidth() 
+                << " " 
+                << gallery.getArt()[i].getHeight()  
+                << " " 
+                << gallery.getArt()[i].getCoordinates().x 
+                << " " 
+                << gallery.getArt()[i].getCoordinates().y
+                <<  endl;
+        }
+    }else{
+        outFile << "data set size exceeds maximum" << endl;
     }
     outFile.close();
+
 }
 
 void highvalue (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     ofstream outFile(outputFile);
     outFile << gallery.getHeight() << endl;
     outFile << gallery.getWidth() << endl;
-
-   //get highest cost from vector
-   //add to gallery
-   //loop
     for(int r = 0; r < pictures.size()-1; r++){
         int max = r;
         for(int k = r; k < pictures.size(); k++){
@@ -103,8 +133,9 @@ void highvalue (Gallery gallery, vector<Picture> pictures, char* outputFile) {
         
 
     }
+
     for(int j = 0; j < pictures.size(); j++){
-        gallery.addArt(pictures[j]);
+        gallery.Insert(pictures[j]);
     }
 
     outFile << getCost(gallery) << endl;
@@ -128,10 +159,8 @@ void highvalue (Gallery gallery, vector<Picture> pictures, char* outputFile) {
 
 void custom (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     ofstream outFile(outputFile);
-
-   //get highest cost from vector
-   //add to gallery
-   //loop
+    outFile << gallery.getHeight() << endl;
+    outFile << gallery.getWidth() << endl;
     for(int r = 0; r < pictures.size()-1; r++){
         int max = r;
         for(int k = r; k < pictures.size(); k++){
@@ -154,12 +183,10 @@ void custom (Gallery gallery, vector<Picture> pictures, char* outputFile) {
         pictures[max].setCoordinates(temp.getCoordinates());
         pictures[max].setPrice(temp.getPrice());
         pictures[max].setID(temp.getID());
-        
-
     }
 
     for(int j = 0; j < pictures.size(); j++){
-        gallery.addArt(pictures[j]);
+        gallery.Insert(pictures[j]);
     }
 
     outFile << getCost(gallery) << endl;
@@ -187,4 +214,30 @@ int getCost(Gallery & gallery){
         total = total + gallery.getArt()[i].getPrice();
     }
     return total;
+}
+
+void genPermutations(vector<vector<Picture>>& allPerms, vector<Picture>& perm, int size, int n) {
+
+    if (size == 1) {
+        allPerms.push_back(perm);
+        return;
+    }
+
+    for (int i = 0; i < size; i++) {
+        genPermutations(allPerms, perm, size - 1, n);
+
+        //if size is odd, swap first and last element
+        if (size % 2 == 1) {
+            Picture temp = perm[0];
+            perm[0] = perm[size - 1];
+            perm[size - 1] = temp;
+        }
+        //if size is even, swap ith and last element
+        else {
+            Picture temp = perm[i];
+            perm[i] = perm[size - 1];
+            perm[size - 1] = temp;
+        }
+    }
+    
 }
