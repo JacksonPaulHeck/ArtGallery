@@ -21,13 +21,6 @@ int main(int argc, char ** argv) {
         bruteforce(gallery, pictures, argv[2]);
         highvalue(gallery, pictures, argv[3]);
         custom(gallery, pictures, argv[4]);
-        for(int i = 0; i < pictures.size(); i++){
-            gallery.addArt(pictures[i]);
-        }
-
-        int cost = getCost(gallery);
-        cout << "Art in Gallery: Cost: " << cost << endl;
-        gallery.showArt();
     }
     else {
         cout << "No Input or Output files given" << endl;
@@ -67,8 +60,8 @@ void parseFile (char * filename, Gallery & gallery, vector<Picture> & pictures){
 void bruteforce (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     ofstream outFile(outputFile);
     if(pictures.size() <= 10){
-        outFile << gallery.getHeight() << endl;
-        outFile << gallery.getWidth() << endl;
+        //outFile << gallery.getHeight() << endl;
+        //outFile << gallery.getWidth() << endl;
         vector<Gallery> possGalleries;
         vector<vector<Picture>> possPerms;
         cout << "generating permutations" << endl;
@@ -80,20 +73,21 @@ void bruteforce (Gallery gallery, vector<Picture> pictures, char* outputFile) {
             Gallery currentGall;
             currentGall.setWidth(gallery.getWidth());
             currentGall.setHeight(gallery.getHeight());
-            cout << "populating gallery: " << i << endl;   
+            cout << "populating gallery: " << i << ", ";   
             for (int j = 0; j < possPerms[i].size(); j++) {
                 currentGall.addArt(possPerms[i][j]);
             }
-            cout << "gallery: " << i << " populated" << endl;
-            cout << "calculating gallery cost" << endl;
+            cout << "gallery: " << i << " populated, ";
+            cout << "calculating gallery cost, ";
             int currentGallPrice = getCost(currentGall);
-            cout << "gallery cost: " << currentGallPrice << endl;
-            currentGall.showArt();
+            cout << "gallery cost: " << currentGallPrice << ", ";
+            //currentGall.showArt();
 
             if (currentGallPrice > maxPrice) {
                 maxPrice = currentGallPrice;
                 gallery = currentGall;
             }
+            cout << "next gallery" << endl;
         }
 
         outFile << getCost(gallery) << endl;
@@ -121,8 +115,8 @@ void bruteforce (Gallery gallery, vector<Picture> pictures, char* outputFile) {
 
 void highvalue (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     ofstream outFile(outputFile);
-    outFile << gallery.getHeight() << endl;
-    outFile << gallery.getWidth() << endl;
+    //outFile << gallery.getHeight() << endl;
+    //outFile << gallery.getWidth() << endl;
 
    //get highest cost from vector
    //add to gallery
@@ -175,8 +169,8 @@ void highvalue (Gallery gallery, vector<Picture> pictures, char* outputFile) {
 
 void custom (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     ofstream outFile(outputFile);
-    outFile << gallery.getHeight() << endl;
-    outFile << gallery.getWidth() << endl;
+    //outFile << gallery.getHeight() << endl;
+    //outFile << gallery.getWidth() << endl;
    //get highest cost from vector
    //add to gallery
    //loop

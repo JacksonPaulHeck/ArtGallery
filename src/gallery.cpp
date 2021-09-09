@@ -79,15 +79,21 @@ bool Gallery :: findSpot(Picture& picture){
                             art[i].getCoordinates().x + art[i].getWidth(), 
                             art[i].getCoordinates().y + art[i].getHeight()
                     };
-    
+
                     if(isOverlap(l1, r1, l2, r2)){
+                        w = w + art[i].getWidth();
+                        if(w == this->width - 1){
+                            h = h + art[i].getHeight();
+                        }
                         condition = false;
                     }
+                    
                 }
                 if(condition == true){
                     picture.setCoordinates({w, h});
                     return true;
                 }
+                w--;
             }
         }
     }
