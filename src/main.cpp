@@ -37,7 +37,7 @@ void parseFile (char * filename, Gallery & gallery, vector<Picture> & pictures){
         int w = stoi(line);
         getline(myfile, line);
         int h = stoi(line);
-        gallery.Init(w, h);
+        gallery.init(w, h);
         getline(myfile, line);
         numOfPictures = stoi(line);
         for (int i = 0; i < numOfPictures; i++){
@@ -70,9 +70,9 @@ void bruteforce (Gallery gallery, vector<Picture> pictures, char* outputFile) {
 
         for (int i = 0; i < possPerms.size(); i++) {
             Gallery currentGall;
-            currentGall.Init(gallery.getWidth(), gallery.getHeight());
+            currentGall.init(gallery.getWidth(), gallery.getHeight());
             for (int j = 0; j < possPerms[i].size(); j++) {
-                currentGall.Insert(possPerms[i][j]);
+                currentGall.insert(possPerms[i][j]);
             }
 
             int currentGallPrice = getCost(currentGall);
@@ -135,7 +135,7 @@ void highvalue (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     }
 
     for(int j = 0; j < pictures.size(); j++){
-        gallery.Insert(pictures[j]);
+        gallery.insert(pictures[j]);
     }
 
     outFile << getCost(gallery) << endl;
@@ -186,7 +186,7 @@ void custom (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     }
 
     for(int j = 0; j < pictures.size(); j++){
-        gallery.Insert(pictures[j]);
+        gallery.insert(pictures[j]);
     }
 
     outFile << getCost(gallery) << endl;
