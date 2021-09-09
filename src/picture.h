@@ -1,3 +1,4 @@
+#include <iostream>
 struct Coordinate {
     int x, y;
 };
@@ -25,4 +26,5 @@ class Picture {
         void setWidth(int);
         void setHeight(int);
         void setCoordinates(Coordinate);
+        void showPicture();
 };

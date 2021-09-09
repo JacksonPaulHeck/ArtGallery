@@ -34,9 +34,10 @@ void parseFile (char * filename, Gallery & gallery, vector<Picture> & pictures){
     ifstream myfile (filename);
     if(myfile.is_open()) {
         getline(myfile, line, ' ');
-        gallery.setWidth(stoi(line));
+        int w = stoi(line);
         getline(myfile, line);
-        gallery.setHeight(stoi(line));
+        int h = stoi(line);
+        gallery.Init(w, h);
         getline(myfile, line);
         numOfPictures = stoi(line);
         for (int i = 0; i < numOfPictures; i++){
@@ -60,34 +61,26 @@ void parseFile (char * filename, Gallery & gallery, vector<Picture> & pictures){
 void bruteforce (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     ofstream outFile(outputFile);
     if(pictures.size() <= 10){
-        //outFile << gallery.getHeight() << endl;
-        //outFile << gallery.getWidth() << endl;
+        outFile << gallery.getHeight() << endl;
+        outFile << gallery.getWidth() << endl;
         vector<Gallery> possGalleries;
         vector<vector<Picture>> possPerms;
-        cout << "generating permutations" << endl;
         genPermutations(possPerms, pictures, pictures.size(), pictures.size());
-        cout << "permutations generated" << endl;
         int maxPrice = 0;
 
         for (int i = 0; i < possPerms.size(); i++) {
             Gallery currentGall;
-            currentGall.setWidth(gallery.getWidth());
-            currentGall.setHeight(gallery.getHeight());
-            cout << "populating gallery: " << i << ", ";   
+            currentGall.Init(gallery.getWidth(), gallery.getHeight());
             for (int j = 0; j < possPerms[i].size(); j++) {
-                currentGall.addArt(possPerms[i][j]);
+                currentGall.Insert(possPerms[i][j]);
             }
-            cout << "gallery: " << i << " populated, ";
-            cout << "calculating gallery cost, ";
+
             int currentGallPrice = getCost(currentGall);
-            cout << "gallery cost: " << currentGallPrice << ", ";
-            //currentGall.showArt();
 
             if (currentGallPrice > maxPrice) {
                 maxPrice = currentGallPrice;
                 gallery = currentGall;
             }
-            cout << "next gallery" << endl;
         }
 
         outFile << getCost(gallery) << endl;
@@ -115,12 +108,8 @@ void bruteforce (Gallery gallery, vector<Picture> pictures, char* outputFile) {
 
 void highvalue (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     ofstream outFile(outputFile);
-    //outFile << gallery.getHeight() << endl;
-    //outFile << gallery.getWidth() << endl;
-
-   //get highest cost from vector
-   //add to gallery
-   //loop
+    outFile << gallery.getHeight() << endl;
+    outFile << gallery.getWidth() << endl;
     for(int r = 0; r < pictures.size()-1; r++){
         int max = r;
         for(int k = r; k < pictures.size(); k++){
@@ -144,8 +133,9 @@ void highvalue (Gallery gallery, vector<Picture> pictures, char* outputFile) {
         
 
     }
+
     for(int j = 0; j < pictures.size(); j++){
-        gallery.addArt(pictures[j]);
+        gallery.Insert(pictures[j]);
     }
 
     outFile << getCost(gallery) << endl;
@@ -169,11 +159,8 @@ void highvalue (Gallery gallery, vector<Picture> pictures, char* outputFile) {
 
 void custom (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     ofstream outFile(outputFile);
-    //outFile << gallery.getHeight() << endl;
-    //outFile << gallery.getWidth() << endl;
-   //get highest cost from vector
-   //add to gallery
-   //loop
+    outFile << gallery.getHeight() << endl;
+    outFile << gallery.getWidth() << endl;
     for(int r = 0; r < pictures.size()-1; r++){
         int max = r;
         for(int k = r; k < pictures.size(); k++){
@@ -196,12 +183,10 @@ void custom (Gallery gallery, vector<Picture> pictures, char* outputFile) {
         pictures[max].setCoordinates(temp.getCoordinates());
         pictures[max].setPrice(temp.getPrice());
         pictures[max].setID(temp.getID());
-        
-
     }
 
     for(int j = 0; j < pictures.size(); j++){
-        gallery.addArt(pictures[j]);
+        gallery.Insert(pictures[j]);
     }
 
     outFile << getCost(gallery) << endl;
