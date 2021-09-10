@@ -30,7 +30,7 @@ void parseFile (char * filename, Gallery & gallery, vector<Picture> & pictures){
     myfile.close();
 }
 
-void bruteforce (Gallery gallery, vector<Picture> pictures, char* outputFile) {
+void bruteforce (Gallery gallery, vector<Picture> pictures, const char* outputFile) {
     ofstream outFile(outputFile);
     if(pictures.size() <= 10){
         outFile << gallery.getHeight() << endl;
@@ -78,7 +78,7 @@ void bruteforce (Gallery gallery, vector<Picture> pictures, char* outputFile) {
 
 }
 
-void highvalue (Gallery gallery, vector<Picture> pictures, char* outputFile) {
+void highvalue (Gallery gallery, vector<Picture> pictures, const char* outputFile) {
     ofstream outFile(outputFile);
     outFile << gallery.getHeight() << endl;
     outFile << gallery.getWidth() << endl;
@@ -129,7 +129,7 @@ void highvalue (Gallery gallery, vector<Picture> pictures, char* outputFile) {
     outFile.close();
 }
 
-void custom (Gallery gallery, vector<Picture> pictures, char* outputFile) {
+void custom (Gallery gallery, vector<Picture> pictures, const char* outputFile) {
     ofstream outFile(outputFile);
     outFile << gallery.getHeight() << endl;
     outFile << gallery.getWidth() << endl;

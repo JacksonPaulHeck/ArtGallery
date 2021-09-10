@@ -25,8 +25,8 @@ Our three input algorithms are
 ## How to Build/Execute
 
 - Navigate into project folder "21f-pa01-jp-and-garretts-cool-kids-team"
-- Run ```g++ -g src/main.cpp src/picture.cpp src/gallery.cpp``` to compile the project
-- Run ```./a.out ./test/input.txt ./output/test-bruteforce.txt ./output/test-highvalue.txt ./output/test-custom.txt```
+- Run ```g++ -g src/main.cpp src/driver.cpp src/picture.cpp src/gallery.cpp``` to compile the project
+- Run ```./a.out ./test/input.txt```
 
 ## Sample I/O
 
