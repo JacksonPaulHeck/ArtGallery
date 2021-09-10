@@ -12,4 +12,5 @@ foreach (file IN LISTS input01 output01 output02 output03)
 endforeach ()
 
 set(CMAKE_CXX_STANDARD 17)
-add_executable(${EXE_NAME} src/main.cpp src/picture.cpp src/gallery.cpp)
+
+add_executable(${EXE_NAME} src/main.cpp src/driver.cpp src/picture.cpp src/gallery.cpp)

@@ -1,3 +1,4 @@
+#include <iostream>
 struct Coordinate {
     int x, y;
 };
@@ -13,6 +14,8 @@ class Picture {
     public:
         Picture();
         Picture(int, int, int, int);
+        Picture(const Picture&);
+        Picture& operator=(const Picture&);
         int getID();
         int getPrice();
         int getWidth();
@@ -23,4 +26,5 @@ class Picture {
         void setWidth(int);
         void setHeight(int);
         void setCoordinates(Coordinate);
+        void showPicture();
 };

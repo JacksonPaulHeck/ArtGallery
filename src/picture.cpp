@@ -1,4 +1,5 @@
 #include "picture.h"
+#include <cstdio>
 
 Picture :: Picture(){
     this->id = 0;
@@ -14,6 +15,23 @@ Picture :: Picture(int id, int price, int width, int height){
     this->height = height;
     this->width = width;
     this->coordinates = {0, 0};
+}
+
+Picture :: Picture(const Picture& orig) {
+    this->id = orig.id;
+    this->price = orig.price;
+    this->height = orig.height;
+    this->width = orig.width;
+    this->coordinates = orig.coordinates;
+}
+
+Picture& Picture :: operator=(const Picture& orig) {
+    this->id = orig.id;
+    this->price = orig.price;
+    this->height = orig.height;
+    this->width = orig.width;
+    this->coordinates = orig.coordinates;
+    return *this;
 }
 
 int Picture :: getID(){
@@ -55,4 +73,5 @@ void Picture :: setWidth(int width){
 void Picture :: setCoordinates(Coordinate spot){
     this->coordinates.x = spot.x;
     this->coordinates.y = spot.y;
+
 }
