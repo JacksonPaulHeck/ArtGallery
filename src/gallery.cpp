@@ -7,6 +7,7 @@ Gallery :: Gallery(){
     this->width = 0;
     this->art = art;
 
+
     this->root = Node();
 };
 Gallery& Gallery:: operator=(const Gallery& orig) {
@@ -127,7 +128,3 @@ void Gallery :: deleteTree(Node * node){
 void Gallery :: deleteTree(){
     deleteTree(&this->root);
 };
-
-
-
-

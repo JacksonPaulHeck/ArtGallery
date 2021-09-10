@@ -73,4 +73,5 @@ void Picture :: setWidth(int width){
 void Picture :: setCoordinates(Coordinate spot){
     this->coordinates.x = spot.x;
     this->coordinates.y = spot.y;
+
 }

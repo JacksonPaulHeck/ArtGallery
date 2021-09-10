@@ -31,6 +31,7 @@ class Gallery {
         void setHeight(int);
         void setWidth(int);
         void addArt(Picture &);
+
         //Bin Packing
         void init(int, int);
         Node * insert(Picture & picture);
