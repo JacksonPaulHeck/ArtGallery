@@ -80,6 +80,6 @@ The Highest Value First algorithm is sub-optimal but still will generate a set t
 3 400 250 250
 4 400 250 250
 ```
-the optimal algorithm would pick and place pictures 2, 3, and 4 giving a total price of 1200. The Highest Value First algorithm would pick only picture 1 only giving a total price of 1000.However, this algorithm runs in O(n<sup>2</sup>) time given that the sorting algorithm used is selection sort.
+the optimal algorithm would pick and place pictures 2, 3, and 4 giving a total price of 1200. The Highest Value First algorithm would pick only picture 1 only giving a total price of 1000. However, this algorithm runs in O(n<sup>2</sup>) time given that the sorting algorithm used is selection sort.
 
 The Ratio algorithm is again a sub-optimal but still will generate a set that could produce a set that has a high total price. This is done again through sorting the input values. They are sorted by calculating the ratio between Price and Total Area. By first inserting the picture with the highest ratio, the price will increase signifigantly while the area taken up on the canvas will be minimized. It also uses the selection sort giving it a time of O(n<sup>2</sup>) as well.
