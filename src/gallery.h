@@ -12,7 +12,6 @@ struct Node{
     int width;
     int height;
     Picture picture;
-    bool isPlaced;
 };
 
 class Gallery {
@@ -22,9 +21,7 @@ class Gallery {
         vector<Picture> art;
         //Bin Packing
         Node root;
-        int binWidth;
-        int binHeight;
-        Node *Insert(Node *, Picture &);
+        Node * insert(Node *, Picture &);
     public:
         Gallery();
         Gallery& operator=(const Gallery&);
@@ -34,16 +31,9 @@ class Gallery {
         void setHeight(int);
         void setWidth(int);
         void addArt(Picture &);
-        void removeArt(int);
-        void showArt();
-        bool findSpot(Picture &);
-        bool isOverlap(Coordinate, Coordinate, Coordinate, Coordinate);
         //Bin Packing
-        void Init(int, int);
-        Node * Insert(Picture & picture);
-        //Node * Insert(int, int);
-        void Show();
-        void Traverse(Node *);
-        void Delete();
-        void Delete(Node *);
+        void init(int, int);
+        Node * insert(Picture & picture);
+        void deleteTree();
+        void deleteTree(Node *);
 };
