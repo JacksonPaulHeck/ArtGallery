@@ -4,8 +4,8 @@
 #include <vector>
 
 void parseFile(char *, Gallery &, vector<Picture> &);
-void bruteforce(Gallery, vector<Picture>, char *);
-void highvalue(Gallery, vector<Picture>, char *);
-void custom(Gallery, vector<Picture>, char *);
+void bruteforce(Gallery, vector<Picture>, const char *);
+void highvalue(Gallery, vector<Picture>, const char *);
+void custom(Gallery, vector<Picture>, const char *);
 int getCost(Gallery &);
 void genPermutations(vector<vector<Picture>>&, vector<Picture>&, int, int);
